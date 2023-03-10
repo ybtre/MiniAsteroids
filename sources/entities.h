@@ -30,8 +30,12 @@
 
 	typedef struct PlayerStats {
 		int lives;
+		int current_xp;
+		int total_xp;
+		int required_xp;
 		float fire_rate;
 		float fire_rate_timer;
+		float xp_pickup_range;
 	} PlayerStats;
 
 	enum UPGRADES {
@@ -64,6 +68,14 @@
 		Entity e;
 		float rotation;
 	} Asteroid;
+
+	typedef struct XPOrb {
+		bool is_acitve;
+		Vector2 pos;
+		float pick_radius;
+		Sprite s;
+		float xp_value;
+	} XPOrb;
 
 	typedef struct GameMap {
 		Sprite s;
@@ -123,6 +135,13 @@
 	void DestroyAsteroid(Asteroid &asteroid);
 
 	void RenderAsteroids(const Asteroid *asteroids, int len, const Texture2D &game_atlas);
+
+	// -- XP -- //
+	void SetupXPOrbs(XPOrb *orbs);
+	XPOrb& GetInactiveOrb(XPOrb *orbs);
+	void SpawnXPOrb(XPOrb &orb, Asteroid &asteroid);
+	void UpdateXPOrbs(XPOrb *orbs, Player &player);
+	void RenderXPOrbs(const XPOrb* orbs, Texture2D &game_atlas);
 
 	// --- Explosion--- //
 	void SetupExplosions(Explosion *e, const int len);

@@ -41,6 +41,85 @@ void RenderCursor(const Cursor& cursor, const Texture2D& game_atlas) {
 
 ///////////////////////
 ///////////////////////
+// --- XP orbss --- //
+///////////////////////
+///////////////////////
+void SetupXPOrbs(XPOrb *orbs){
+	assert(orbs != nullptr);
+
+	for (int i = 0; i < ARR_XP_ORBS; i++) {
+		orbs[i].is_acitve = false;
+		orbs[i].pick_radius = 10;
+		orbs[i].pos = { -300, -300 };
+		orbs[i].s.src = { 96, 16, SPRITE_SIZE, SPRITE_SIZE };
+		orbs[i].s.dest = {
+			orbs[i].pos.x,
+			orbs[i].pos.y,
+			orbs[i].s.src.width * 4,
+			orbs[i].s.src.height * 4
+		};
+		orbs[i].s.center = {
+			(orbs[i].s.src.width * 4) / 2,
+			(orbs[i].s.src.height * 4) / 2
+		};
+	};
+};
+
+XPOrb& GetInactiveOrb(XPOrb *orbs){
+	assert(orbs != nullptr);
+
+	for (int i = 0; i < ARR_XP_ORBS; i++) {
+		if(!orbs[i].is_acitve){
+			return orbs[i];
+		};
+	};
+};
+
+void SpawnXPOrb(XPOrb &orb, Asteroid &asteroid){
+	orb.is_acitve = true;
+	orb.pos = Vector2{asteroid.e.sprite.dest.x, asteroid.e.sprite.dest.y};
+	orb.s.dest.x = orb.pos.x;
+	orb.s.dest.y = orb.pos.y;
+}
+
+void UpdateXPOrbs(XPOrb *orbs, Player &player){
+	assert(orbs != nullptr);
+
+	for(int i = 0; i < ARR_XP_ORBS; i++){
+		if(!orbs[i].is_acitve) continue;
+
+		if(CheckCollisionCircles(
+			orbs[i].pos, orbs[i].pick_radius,
+			Vector2{player.e.sprite.dest.x, player.e.sprite.dest.y}, 
+			player.stats.xp_pickup_range))
+			{
+				orbs[i].is_acitve = false;
+				player.stats.current_xp++;
+			}
+	}
+}
+
+void RenderXPOrbs(const XPOrb* orbs, Texture2D &game_atlas){
+	assert(orbs != nullptr);
+
+	for(int i = 0; i < ARR_XP_ORBS; i++){
+		if(orbs[i].is_acitve){
+		DrawTexturePro(
+			game_atlas,
+			orbs[i].s.src,
+			orbs[i].s.dest,
+			orbs[i].s.center,
+			0,
+			WHITE
+		);
+		// DrawCircleLines(orbs[i].s.dest.x, orbs[i].s.dest.y, orbs[i].pick_radius, GREEN);
+		// DrawCircleLines(orbs[i].pos.x, orbs[i].pos.y, 10, RED);
+		}
+	}
+};
+
+///////////////////////
+///////////////////////
 // --- MISC --- //
 ///////////////////////
 ///////////////////////

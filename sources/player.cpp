@@ -5,6 +5,7 @@ void SetupPlayer(Player& player) {
 	player.stats.lives = 3;
 	player.stats.fire_rate = .4f;
 	player.stats.fire_rate_timer = 0;
+	player.stats.xp_pickup_range = 50;
 	player.rotation = 0;
 
 	player.e.rec = { (GLOBALS::SCREEN.x / 2), (GLOBALS::SCREEN.y / 2), SPRITE_SIZE_SCALED, SPRITE_SIZE_SCALED };

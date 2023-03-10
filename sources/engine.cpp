@@ -5,14 +5,14 @@ void Engine::Init() {
 
 	game_ol->SetupGame();
 
-	bg_tex = LoadTexture("assets/background.png");
+	bg_tex = LoadTexture("../assets/background.png");
 	bg_s.src = { 0, 0, 420, 315 };
 	bg_s.dest = { 0, 0, bg_s.src.width * 2.44f, bg_s.src.height * 2.44f };
 	bg_s.center = { 0,0 };
 
 	InitUpgradeButtons(upgrade_btns, ARR_UPGRADE_BTNS);
 
-	game_atlas = LoadTexture("assets/game_atlas_8x8.png");
+	game_atlas = LoadTexture("../assets/game_atlas_8x8.png");
 
 	SetupGameMap(map_grid);
 
@@ -31,6 +31,8 @@ void Engine::Init() {
 	SetupCursor(cursor);
 
 	SetupExplosions(explosions, ARR_EXPLOSIONS);
+
+	SetupXPOrbs(xp_orbs);
 
 	main_text_AED.counter = 0;
 	main_text_AED.duration = 90;
@@ -214,6 +216,12 @@ void Engine::UpdateGameplay() {
 
 		game_ol->wave_duration -= GetFrameTime();
 
+		// if(player.stats.current_xp >= 5){
+		// 	player.stats.current_xp = 0;
+		// 	RandomizeUpgradeButtons(upgrade_btns, ARR_UPGRADE_BTNS);
+
+		// 	game_ol->SetCurrentScreen(game_ol->UPGRADE);
+		// }
 		if (game_ol->wave_duration < 0) {
 			game_ol->has_wave_finished = true;
 			game_ol->current_wave++;
@@ -253,6 +261,8 @@ void Engine::UpdateGameplay() {
 
 		UpdateBullets(bullets, ARR_BULLETS);
 
+		UpdateXPOrbs(xp_orbs, player);
+
 		//------Collision Detection------//
 		for (auto& asteroid : asteroids) {
 			if (!asteroid.e.is_alive) continue;
@@ -260,6 +270,8 @@ void Engine::UpdateGameplay() {
 				if (!bullet.e.is_alive) continue;
 				if (CheckCollisionRecs(bullet.e.rec, asteroid.e.rec)) {
 					game_ol->score += 1;
+					XPOrb& o = GetInactiveOrb(xp_orbs);
+					SpawnXPOrb(o, asteroid);
 					DestroyBullet(bullet);
 					DestroyAsteroid(asteroid);
 					//asteroid.e.is_alive = false;
@@ -311,6 +323,8 @@ void Engine::RenderGameplay() {
 
 			RenderGameMap(map_grid, game_atlas);
 
+			RenderXPOrbs(xp_orbs, game_atlas);
+
 			RenderAsteroids(asteroids, ARR_ASTEROIDS, game_atlas);
 
 			RenderBullets(bullets, ARR_BULLETS, game_atlas);
@@ -349,6 +363,7 @@ void Engine::RenderGameplay() {
 		0,
 		WHITE);
 	DrawText(TextFormat("%d", game_ol->score), 65, 100, 50, RAYWHITE);
+	DrawText(TextFormat("%d", player.stats.current_xp), 65, 200, 50, RAYWHITE);
 
 	DrawText(TextFormat("Wave %d", (int)game_ol->current_wave + 1), (int)(GLOBALS::SCREEN.x / 2 - 30), 10, 30, RAYWHITE);
 	DrawText(TextFormat("%d", static_cast<int>(game_ol->wave_duration)), (int)(GLOBALS::SCREEN.x / 2), 40, 50, RAYWHITE);

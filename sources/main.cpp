@@ -59,7 +59,7 @@ void UpdateDrawFrame()
 void SetupWindow() {
 	SetTargetFPS(60);
 
-	Image icon = LoadImage("resources/icons/window_icon.png");
+	Image icon = LoadImage("../assets/icons/window_icon.png");
 
 	ImageFormat(&icon, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
 

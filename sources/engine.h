@@ -4,11 +4,6 @@
 #include "globals.h"
 #include "entities.h"
 
-#define ARR_ASTEROIDS 100
-#define ARR_BULLETS 150
-#define ARR_EXPLOSIONS 15
-#define ARR_UPGRADE_BTNS 3
-
 class AEasingData{
 public:
 	int counter;
@@ -59,6 +54,7 @@ public:
 	GameMap map_grid;
 	Player player;
 	Asteroid asteroids[ARR_ASTEROIDS]{};
+	XPOrb xp_orbs[ARR_XP_ORBS]{};
 	Bullet bullets[ARR_BULLETS]{};
 	Explosion explosions[ARR_EXPLOSIONS]{};
 	Cursor cursor;

@@ -8,6 +8,12 @@
 #include "reasings.h"
 #include "easings.h"
 
+#define ARR_ASTEROIDS 100
+#define ARR_BULLETS 150
+#define ARR_EXPLOSIONS 15
+#define ARR_UPGRADE_BTNS 3
+#define ARR_XP_ORBS 100
+
 using namespace std;
 
 /////////////////////////////////////////////////////////////////
