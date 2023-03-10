@@ -60,5 +60,12 @@ DevLog
 09/03
 - //setup web builds and moved project over to MiniAsteroids repo
 
+10/03
+- //added XP orbs functionality
+- //moved over from upgrading between waves to upgrading when enough xp
+- //required xp scales with each lvl
+- //background parallax
+- //made grid slightly transparent
+
 
 THUS FAR: ~19:30
