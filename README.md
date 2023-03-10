@@ -1,64 +1,64 @@
-# Raylib C++ CMake Template
+DevLog                               
 
-<p align="center">
-    <img 
-        src="https://user-images.githubusercontent.com/3422347/214886231-efaf580b-ffe6-44e0-b40b-ea8d84df3754.gif" 
-        style="width: 100%; max-width: 400px;" width="400" align="center"
-    />
-</p>
+28/02
+- //setup new screen size - 1024x758
+- //Read textures from the atlas
+- //setup new playing area in 14x14 grid, cell size 8px(sprite size) * 6 scale_multi
+- //setup grid to use sprite
+- //setup entity wrapping to work only in grid not screen bounds
+- //setup new UI with sprites out of playing area
+- //replace ship and asteroids with sprites
+- //fix ghost bullets
+- //replace bullet with sprites
+- //add explosion anim
+- //add explosion sprite
+
+01/03
+- //refactor explosion anim struct to work for other anims
+- //add bullet anim
+- //add ship engine anim
+- //use fire rate on mosue hold, not spam left click
+- //refactor fire rate into bullet class - works but kind stupid
+- //add window icon
+- //dont spawn asteroids around player
+
+02/03
+- //update struct Explosion to use struct AnimData
+- //extract handling of updating anims into function
+- //fix engine sprite/anim not wrapping around screen bounds
+- //split up entities.h/.cpp - MORE TO IMPROVE
+- //update main menu and game over screens 
+- - //on press play bounce title up and press play text down
+- - //fade in from center the game map and entities, when done start game
+- - //game over to be defined
+- //SetupGameMap based off of screen center, not window origin (top left)
+
+03/03
+- //make fade global, not screen dependant
+- //add fade to other screen transitions
+
+06/03
+- //replace cursor with cursor sprite
+- //dont start updating gameplay screen until after fade is done
+- //pause functionality to gameplay screen
+- //add Camera2D
+- //screen shake effect
+- //trigger screen shake on player death + timer
+
+07/03 
+- //basic wave control
+- //asteroid spawn to work with waves
+- //handle dead asteroids and bullets better
+- //basic upgrade screen state added
+
+08/03
+- //upgrades system 
+- //balancing
+- //bullets use lifetime
+- //asteroids chase player
+
+09/03
+- //setup web builds and moved project over to MiniAsteroids repo
 
 
-This repo constains a small game that you can use as a template for your Raylib
-games if you wish to use C++ and CMake.
-
-CMake is configured to automatically download the dependencies of your game
-through git, and pin them to a specific commit version (for example, [see how
-we're importing the raylib
-dependency](https://github.com/tupini07/raylib-cpp-cmake-template/blob/c6996a2477e713671337e4c40d1b602f10acb01a/CMakeLists.txt#L25-L31)).
-This provides a very flexible mechanism to include new dependencies, or update
-the existing ones, without having to muck about with your system's package
-manager, or worrying about linking external libraries at all. It is a bit slower
-on the first build though, since CMake will need to build everything.
-
-For the moment, the project is using the following dependencies which should be
-useful in many games:
-
-- [LDtkLoader](https://github.com/Madour/LDtkLoader) - used to load and help
-  with drawing a map made with the awesome [LDtk](https://ldtk.io/).
-- [box2d](https://github.com/erincatto/box2d) - ubuquitous and easy to use 2D
-  physics engine.
-- [fmt](https://github.com/fmtlib/fmt) - logging and string formatting library
-  that makes your life much easier.
-
-If you don't know where to start or how to use this template then check out [the wiki](https://github.com/tupini07/raylib-cpp-cmake-template/wiki)!
-
-## Important files
-
-You can get a good understanding of how things work by reading through the
-following files:
-
-- [[main.cpp](https://github.com/tupini07/raylib-cpp-cmake-template/blob/c6996a2477e713671337e4c40d1b602f10acb01a/sources/main.cpp)]
-  this is, of course, the entrpoint of the game. It maintains a top-level frame
-  buffer to which all draw operations are done, and then this buffer is drawn to
-  the screen, with a specific scale (meaning you can easily scale and/or
-  translate your game without having to worry about the actual screen
-  resolution). It also calls the SceneManager's update and draw methods.
-- [[SceneManager](https://github.com/tupini07/raylib-cpp-cmake-template/blob/c6996a2477e713671337e4c40d1b602f10acb01a/sources/scenes/SceneManager.hpp)]
-  Implements an extremly simple scene manager. It updates and draws the current
-  scene or switches to a new scene if necessary.
-- [[TitleScene](https://github.com/tupini07/raylib-cpp-cmake-template/blob/c6996a2477e713671337e4c40d1b602f10acb01a/sources/scenes/TitleScene/TitleScene.cpp)]
-  This is the main screen that is shown when the game starts. It doesn't contain
-  much, just a keypress listener to switch on to the actual GameScene.
-- [[GameScene](https://github.com/tupini07/raylib-cpp-cmake-template/blob/c6996a2477e713671337e4c40d1b602f10acb01a/sources/scenes/GameScene/GameScene.cpp)]
-  This is the scene where the main _game_ happens. It's not really a game per
-  se, just a showcase of how you would set up a
-  [Player](https://github.com/tupini07/raylib-cpp-cmake-template/blob/c6996a2477e713671337e4c40d1b602f10acb01a/sources/entities/Player/Player.cpp),
-  draw an LDtk map, and add some physics to everything using Box2D.
-
-
-# Questions and comments
-
-If you have any question then feel free to [create a new discussion](https://github.com/tupini07/raylib-cpp-cmake-template/discussions/new), or if you see any issue then go ahead and [open a new issue](https://github.com/tupini07/raylib-cpp-cmake-template/issues/new). 
-
-If you see anything that can be improved then feel free to make a PR! Those are always welcome 🙂 Another welcomed contribution is that of going through the wiki and clarifying content or adding new things you think might be helpful for others.
-"# MiniAsteroids" 
+THUS FAR: ~19:30
