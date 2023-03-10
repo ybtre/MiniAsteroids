@@ -32,7 +32,7 @@
 		int lives;
 		int current_xp;
 		int total_xp;
-		int required_xp;
+		float required_xp;
 		float fire_rate;
 		float fire_rate_timer;
 		float xp_pickup_range;
@@ -105,6 +105,8 @@
 
 	void UpdatePlayer(Player &player);
 	void RenderPlayer(const Player &player, const Texture2D& game_atlas);
+	
+	void IncreaseReqXP(Player &player);
 
 	void Upgrade_PlayerFirerate(Player &player, float multiplier);
 	void Upgrade_PlayerSpeed(Player &player, float multiplier);

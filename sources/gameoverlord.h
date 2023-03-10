@@ -40,7 +40,7 @@ public:
 	float gameplay_time_current = 0;
 	float wave_duration = 0.f;
 	bool is_wave_starting = false;
-	bool has_wave_finished = false;
+	// bool has_wave_finished = false;
 	AWave waves[ARR_WAVES] = {
 		{ 1, 10.9f, 1.f },
 		{ 2, 12.9f, .8f },

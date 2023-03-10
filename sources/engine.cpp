@@ -208,33 +208,25 @@ void Engine::UpdateGameplay() {
 				return;
 			}
 			game_ol->wave_duration = game_ol->waves[game_ol->current_wave].duration;
-			ResetAsteroids(asteroids, ARR_ASTEROIDS);
 
-			game_ol->has_wave_finished = false;
 			game_ol->is_wave_starting = false;
 		}
 
-		game_ol->wave_duration -= GetFrameTime();
-
-		// if(player.stats.current_xp >= 5){
-		// 	player.stats.current_xp = 0;
-		// 	RandomizeUpgradeButtons(upgrade_btns, ARR_UPGRADE_BTNS);
-
-		// 	game_ol->SetCurrentScreen(game_ol->UPGRADE);
-		// }
-		if (game_ol->wave_duration < 0) {
-			game_ol->has_wave_finished = true;
-			game_ol->current_wave++;
+		if(player.stats.current_xp >= player.stats.required_xp){
+			player.stats.current_xp = 0;
+			IncreaseReqXP(player);
 
 			RandomizeUpgradeButtons(upgrade_btns, ARR_UPGRADE_BTNS);
-			game_ol->is_wave_starting = true;
-
 			game_ol->SetCurrentScreen(game_ol->UPGRADE);
 		}
-
-		if (!game_ol->has_wave_finished) {
-			AsteroidsWaveSpawner(asteroids, ARR_ASTEROIDS, player, game_ol->waves[game_ol->current_wave]);
+		
+		game_ol->wave_duration -= GetFrameTime();
+		if (game_ol->wave_duration < 0) {
+			game_ol->current_wave++;
+			game_ol->is_wave_starting = true;
 		}
+
+		AsteroidsWaveSpawner(asteroids, ARR_ASTEROIDS, player, game_ol->waves[game_ol->current_wave]);
 
 		if (is_shaking) shake_timer += GetFrameTime();
 		if (is_shaking && shake_timer <= shake_duration) {
@@ -363,7 +355,9 @@ void Engine::RenderGameplay() {
 		0,
 		WHITE);
 	DrawText(TextFormat("%d", game_ol->score), 65, 100, 50, RAYWHITE);
-	DrawText(TextFormat("%d", player.stats.current_xp), 65, 200, 50, RAYWHITE);
+	DrawText(TextFormat("%d", player.stats.current_xp), 65, 150, 50, RAYWHITE);
+	DrawText(TextFormat("%d", player.stats.total_xp), 65, 200, 50, RAYWHITE);
+	DrawText(TextFormat("%.1f", player.stats.required_xp), 65, 250, 50, RAYWHITE);
 
 	DrawText(TextFormat("Wave %d", (int)game_ol->current_wave + 1), (int)(GLOBALS::SCREEN.x / 2 - 30), 10, 30, RAYWHITE);
 	DrawText(TextFormat("%d", static_cast<int>(game_ol->wave_duration)), (int)(GLOBALS::SCREEN.x / 2), 40, 50, RAYWHITE);

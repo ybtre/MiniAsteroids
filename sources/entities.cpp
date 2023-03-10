@@ -50,6 +50,7 @@ void SetupXPOrbs(XPOrb *orbs){
 	for (int i = 0; i < ARR_XP_ORBS; i++) {
 		orbs[i].is_acitve = false;
 		orbs[i].pick_radius = 10;
+		orbs[i].xp_value = 1;
 		orbs[i].pos = { -300, -300 };
 		orbs[i].s.src = { 96, 16, SPRITE_SIZE, SPRITE_SIZE };
 		orbs[i].s.dest = {
@@ -94,7 +95,8 @@ void UpdateXPOrbs(XPOrb *orbs, Player &player){
 			player.stats.xp_pickup_range))
 			{
 				orbs[i].is_acitve = false;
-				player.stats.current_xp++;
+				player.stats.current_xp += orbs[i].xp_value;
+				player.stats.total_xp += orbs[i].xp_value;
 			}
 	}
 }

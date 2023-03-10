@@ -109,6 +109,6 @@ void RenderBullets(const Bullet* bullets, const int len, const Texture2D& game_a
 
 void Upgrade_BulletSpeed(Bullet *bullets, const int len, float multiplier){
 	for (int i = 0; i < len; i++) {
-		bullets[i].e.speed *= bullets[i].e.speed;
+		bullets[i].e.speed *= multiplier;
 	}
 }

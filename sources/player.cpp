@@ -6,6 +6,7 @@ void SetupPlayer(Player& player) {
 	player.stats.fire_rate = .4f;
 	player.stats.fire_rate_timer = 0;
 	player.stats.xp_pickup_range = 50;
+	player.stats.required_xp = 5;
 	player.rotation = 0;
 
 	player.e.rec = { (GLOBALS::SCREEN.x / 2), (GLOBALS::SCREEN.y / 2), SPRITE_SIZE_SCALED, SPRITE_SIZE_SCALED };
@@ -132,6 +133,10 @@ void RenderPlayer(const Player& player, const Texture2D& game_atlas) {
 	               player.rotation,
 	               WHITE);
 };
+
+void IncreaseReqXP(Player &player){
+	player.stats.required_xp *= 1.2f;
+}
 
 void Upgrade_PlayerFirerate(Player &player, float multiplier){
 	player.stats.fire_rate /= multiplier;
