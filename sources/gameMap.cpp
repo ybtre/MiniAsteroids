@@ -20,7 +20,7 @@ void RenderGameMap(GameMap& map, const Texture2D& game_atlas) {
 			               map.s.dest,
 			               map.s.center,
 			               0,
-			               WHITE);
+			               CLITERAL(Color){ 255, 255, 255, 220 });
 		}
 	}
 }

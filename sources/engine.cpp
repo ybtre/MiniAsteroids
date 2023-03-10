@@ -7,7 +7,8 @@ void Engine::Init() {
 
 	bg_tex = LoadTexture("../assets/background.png");
 	bg_s.src = { 0, 0, 420, 315 };
-	bg_s.dest = { 0, 0, bg_s.src.width * 2.44f, bg_s.src.height * 2.44f };
+	// bg_s.dest = { 0, 0, bg_s.src.width * 2.44f, bg_s.src.height * 2.44f };
+	bg_s.dest = { -35, -35, bg_s.src.width * 2.64f, bg_s.src.height * 2.64f };
 	bg_s.center = { 0,0 };
 
 	InitUpgradeButtons(upgrade_btns, ARR_UPGRADE_BTNS);
@@ -239,7 +240,7 @@ void Engine::UpdateGameplay() {
 
 		WrapEntityInScreenLimits(player.e);
 
-		UpdatePlayer(player);
+		UpdatePlayer(player, bg_s);
 
 		UpdateAsteroids(asteroids, ARR_ASTEROIDS, player);
 
@@ -355,9 +356,14 @@ void Engine::RenderGameplay() {
 		0,
 		WHITE);
 	DrawText(TextFormat("%d", game_ol->score), 65, 100, 50, RAYWHITE);
-	DrawText(TextFormat("%d", player.stats.current_xp), 65, 150, 50, RAYWHITE);
-	DrawText(TextFormat("%d", player.stats.total_xp), 65, 200, 50, RAYWHITE);
-	DrawText(TextFormat("%.1f", player.stats.required_xp), 65, 250, 50, RAYWHITE);
+	// DrawText(TextFormat("%d", player.stats.current_xp), 65, 150, 30, RAYWHITE);
+	// DrawText(TextFormat("%d", player.stats.total_xp), 65, 200, 50, RAYWHITE);
+	// DrawText(TextFormat("/"), 85, 150, 30, RAYWHITE);
+	// DrawText(TextFormat("%.1f", player.stats.required_xp), 110, 150, 30, RAYWHITE);
+
+	DrawText(TextFormat("XP"), 18, 155, 20, GOLD);
+	DrawRectangle(18, 178, 104, 17, DARKGRAY);
+	DrawRectangle(20, 182, (player.stats.current_xp/player.stats.required_xp) * 100, 15, GOLD);
 
 	DrawText(TextFormat("Wave %d", (int)game_ol->current_wave + 1), (int)(GLOBALS::SCREEN.x / 2 - 30), 10, 30, RAYWHITE);
 	DrawText(TextFormat("%d", static_cast<int>(game_ol->wave_duration)), (int)(GLOBALS::SCREEN.x / 2), 40, 50, RAYWHITE);

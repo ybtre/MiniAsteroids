@@ -77,7 +77,7 @@ void ResetPlayer_OnGameOver(Player& player) {
 	};
 };
 
-void UpdatePlayer(Player& player) {
+void UpdatePlayer(Player& player, Sprite &bg) {
 
 	player.stats.fire_rate_timer -= GetFrameTime();
 
@@ -86,18 +86,22 @@ void UpdatePlayer(Player& player) {
 	if (IsKeyDown(KEY_W)) {
 		player.e.rec.y -= player.e.speed * GetFrameTime();
 		player.e.sprite.dest.y -= player.e.speed * GetFrameTime();
+		bg.dest.y += player.e.speed * GetFrameTime() * .1f ;
 	}
 	if (IsKeyDown(KEY_S)) {
 		player.e.rec.y += player.e.speed* GetFrameTime();
 		player.e.sprite.dest.y += player.e.speed* GetFrameTime();
+		bg.dest.y -= player.e.speed * GetFrameTime() * .1f ;
 	}
 	if (IsKeyDown(KEY_A)) {
 		player.e.rec.x -= player.e.speed* GetFrameTime();
 		player.e.sprite.dest.x -= player.e.speed* GetFrameTime();
+		bg.dest.x += player.e.speed * GetFrameTime() * .1f ;
 	}
 	if (IsKeyDown(KEY_D)) {
 		player.e.rec.x += player.e.speed* GetFrameTime();
 		player.e.sprite.dest.x += player.e.speed* GetFrameTime();
+		bg.dest.x -= player.e.speed * GetFrameTime() * .1f ;
 	}
 
 	float dx = player.e.rec.x - (GetMouseX() - SPRITE_OFFSET);

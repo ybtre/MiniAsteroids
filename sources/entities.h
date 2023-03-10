@@ -103,7 +103,7 @@
 	void ResetPlayer_OnDie(Player &player);
 	void ResetPlayer_OnGameOver(Player &player);
 
-	void UpdatePlayer(Player &player);
+	void UpdatePlayer(Player& player, Sprite &bg);
 	void RenderPlayer(const Player &player, const Texture2D& game_atlas);
 	
 	void IncreaseReqXP(Player &player);
