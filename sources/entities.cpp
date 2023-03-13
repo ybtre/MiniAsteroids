@@ -48,6 +48,13 @@ void SetupXPOrbs(XPOrb *orbs){
 	assert(orbs != nullptr);
 
 	for (int i = 0; i < ARR_XP_ORBS; i++) {
+		orbs[i].ease.is_active = false;
+		orbs[i].ease.counter = 0;
+		orbs[i].ease.duration = 60;
+		orbs[i].ease.start = { 0, 0 };
+		orbs[i].ease.end = { 0, 0 };
+		orbs[i].ease.current = { 0, 0};
+
 		orbs[i].is_acitve = false;
 		orbs[i].pick_radius = 10;
 		orbs[i].xp_value = 1;
@@ -88,19 +95,42 @@ void UpdateXPOrbs(XPOrb *orbs, Player &player){
 
 	for(int i = 0; i < ARR_XP_ORBS; i++){
 		if(!orbs[i].is_acitve) continue;
+		if(orbs[i].ease.is_active){
+			XP_Orb_Easing(orbs[i], player);
+		};
 
 		if(CheckCollisionCircles(
 			orbs[i].pos, orbs[i].pick_radius,
 			Vector2{player.e.sprite.dest.x, player.e.sprite.dest.y}, 
 			player.stats.xp_pickup_range))
-			{
-				orbs[i].is_acitve = false;
-				player.stats.current_xp += orbs[i].xp_value;
-				player.stats.total_xp += orbs[i].xp_value;
+			{	
+				orbs[i].ease.is_active = true;
+				// orbs[i].is_acitve = false;
+				// player.stats.current_xp += orbs[i].xp_value;
+				// player.stats.total_xp += orbs[i].xp_value;
 			}
 	}
 }
 
+void XP_Orb_Easing(XPOrb &orb_to_ease, Player &player){
+	orb_to_ease.ease.counter++;
+	
+	orb_to_ease.ease.current.x = EaseBackIn((float)orb_to_ease.ease.counter, orb_to_ease.pos.x, player.e.sprite.dest.x -orb_to_ease.pos.x , (float)orb_to_ease.ease.duration);
+	orb_to_ease.ease.current.y = EaseBackIn((float)orb_to_ease.ease.counter, orb_to_ease.pos.y, player.e.sprite.dest.y - orb_to_ease.pos.y, (float)orb_to_ease.ease.duration);
+
+	orb_to_ease.pos = orb_to_ease.ease.current;
+	orb_to_ease.s.dest.x  = orb_to_ease.ease.current.x;
+	orb_to_ease.s.dest.y  = orb_to_ease.ease.current.y;
+
+	if(orb_to_ease.ease.counter >= orb_to_ease.ease.duration
+		|| (orb_to_ease.s.dest.x == player.e.sprite.dest.x && orb_to_ease.s.dest.y == player.e.sprite.dest.y)){
+		orb_to_ease.ease.counter = 0;
+		orb_to_ease.is_acitve = false;
+		orb_to_ease.ease.is_active = false;
+		player.stats.current_xp += orb_to_ease.xp_value;
+		player.stats.total_xp += orb_to_ease.xp_value;
+	}
+}
 void RenderXPOrbs(const XPOrb* orbs, Texture2D &game_atlas){
 	assert(orbs != nullptr);
 

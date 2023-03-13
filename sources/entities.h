@@ -28,6 +28,15 @@
 		int num_frames;
 	} AnimData;
 
+	typedef struct MEasingData{
+		bool is_active;
+		int counter;
+		int duration;
+		Vector2 start;
+		Vector2 end;
+		Vector2 current;
+	} MEasingData;
+
 	typedef struct PlayerStats {
 		int lives;
 		int current_xp;
@@ -75,6 +84,7 @@
 		float pick_radius;
 		Sprite s;
 		float xp_value;
+		MEasingData ease;
 	} XPOrb;
 
 	typedef struct GameMap {
@@ -142,6 +152,7 @@
 	void SetupXPOrbs(XPOrb *orbs);
 	XPOrb& GetInactiveOrb(XPOrb *orbs);
 	void SpawnXPOrb(XPOrb &orb, Asteroid &asteroid);
+	void XP_Orb_Easing(XPOrb &orb_to_ease, Player &player);
 	void UpdateXPOrbs(XPOrb *orbs, Player &player);
 	void RenderXPOrbs(const XPOrb* orbs, Texture2D &game_atlas);
 

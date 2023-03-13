@@ -153,7 +153,8 @@ extern "C" {            // Prevents name mangling of functions
 	// Back Easing functions
 	EASEDEF float EaseBackIn(float t, float b, float c, float d) // Ease: Back In
 	{
-		float s = 1.70158f;
+		// float s = 1.70158f;
+		float s = 1.f;
 		float postFix = t /= d;
 		return (c * (postFix)*t * ((s + 1.0f) * t - s) + b);
 	}
