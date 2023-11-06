@@ -1,6 +1,24 @@
 DevLog                               
 THUS FAR: ~23:00h
 
+<br>
+
+<details>
+  <summary>Dev Gifs!!</summary>
+
+  [![Image from Gyazo](https://i.gyazo.com/54dc41578d510db25e8a9bb7e389ad9d.gif)](https://gyazo.com/54dc41578d510db25e8a9bb7e389ad9d)
+
+  [![Image from Gyazo](https://i.gyazo.com/80a83d3c603ecb348eb532ffb4e011dc.gif)](https://gyazo.com/80a83d3c603ecb348eb532ffb4e011dc)
+  
+  [![Image from Gyazo](https://i.gyazo.com/10cca0db778a08824a23ed09cded0fa2.gif)](https://gyazo.com/10cca0db778a08824a23ed09cded0fa2)
+
+  
+</details>
+<br>
+<br>
+<br>
+
+
 //TODO:
 - properly reset game state on game over
 - change how player death is handled (short invulnerability and dont move back to center of screen)
