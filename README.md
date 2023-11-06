@@ -6,13 +6,11 @@ THUS FAR: ~23:00h
 <details>
   <summary>Dev Gifs!!</summary>
 
-  [![Image from Gyazo](https://i.gyazo.com/54dc41578d510db25e8a9bb7e389ad9d.gif)](https://gyazo.com/54dc41578d510db25e8a9bb7e389ad9d)
+  [![Mini Asteroids Startup](MiniAsteroids1.gif)]
 
-  [![Image from Gyazo](https://i.gyazo.com/80a83d3c603ecb348eb532ffb4e011dc.gif)](https://gyazo.com/80a83d3c603ecb348eb532ffb4e011dc)
+  [![Mini Asteroids Fighting](MiniAsteroids2.gif)]
   
-  [![Image from Gyazo](https://i.gyazo.com/10cca0db778a08824a23ed09cded0fa2.gif)](https://gyazo.com/10cca0db778a08824a23ed09cded0fa2)
-
-  
+  [![Mini Asteroids Game Over](MiniAsteroids1.gif)]
 </details>
 <br>
 <br>
