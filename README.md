@@ -16,12 +16,6 @@ THUS FAR: ~23:00h
 <br>
 <br>
 
-Building:
-Only on Windows.
-- go to root folder
-- use command "make"
-- either run Game.exe from build folder or use "run.bat" file
-
 //TODO:
 - properly reset game state on game over
 - change how player death is handled (short invulnerability and dont move back to center of screen)
