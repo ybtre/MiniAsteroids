@@ -3,15 +3,12 @@ THUS FAR: ~23:00h
 
 <br>
 
-<details>
-  <summary>Dev Gifs!!</summary>
 
   [![Mini Asteroids Startup](MiniAsteroids1.gif)]
 
   [![Mini Asteroids Fighting](MiniAsteroids2.gif)]
   
   [![Mini Asteroids Game Over](MiniAsteroids1.gif)]
-</details>
 <br>
 <br>
 <br>
